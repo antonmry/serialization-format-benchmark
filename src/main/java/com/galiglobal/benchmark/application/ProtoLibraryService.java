@@ -1,7 +1,7 @@
-package com.szymon_kaluza.protobuf_avro.application;
+package com.galiglobal.benchmark.application;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.szymon_kaluza.protobuf_avro.proto.model.Library;
+import com.galiglobal.benchmark.proto.model.Library;
 
 public class ProtoLibraryService {
 

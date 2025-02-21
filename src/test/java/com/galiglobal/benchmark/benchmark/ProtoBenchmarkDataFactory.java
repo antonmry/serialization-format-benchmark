@@ -1,8 +1,8 @@
-package com.szymon_kaluza.protobuf_avro.benchmark;
+package com.galiglobal.benchmark.benchmark;
 
-import com.szymon_kaluza.protobuf_avro.proto.model.Author;
-import com.szymon_kaluza.protobuf_avro.proto.model.Book;
-import com.szymon_kaluza.protobuf_avro.proto.model.Library;
+import com.galiglobal.benchmark.proto.model.Author;
+import com.galiglobal.benchmark.proto.model.Book;
+import com.galiglobal.benchmark.proto.model.Library;
 import net.bytebuddy.utility.RandomString;
 
 import java.util.ArrayList;

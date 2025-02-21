@@ -1,6 +1,6 @@
-package com.szymon_kaluza.protobuf_avro.application;
+package com.galiglobal.benchmark.application;
 
-import com.szymon_kaluza.protobuf_avro.avro.model.Library;
+import com.galiglobal.benchmark.avro.model.Library;
 import org.apache.avro.io.Decoder;
 import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.io.Encoder;

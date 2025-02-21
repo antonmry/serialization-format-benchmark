@@ -1,26 +1,27 @@
-package com.szymon_kaluza.protobuf_avro.benchmark;
+package com.galiglobal.benchmark.benchmark;
 
-import com.szymon_kaluza.protobuf_avro.application.AvroLibraryService;
-import com.szymon_kaluza.protobuf_avro.avro.model.Library;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.galiglobal.benchmark.application.ProtoLibraryService;
+import com.galiglobal.benchmark.proto.model.Library;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.List;
 
-import static com.szymon_kaluza.protobuf_avro.benchmark.AvroBenchmarkDataFactory.*;
+import static com.galiglobal.benchmark.benchmark.ProtoBenchmarkDataFactory.*;
 
-@State(Scope.Benchmark)
-public class AvroBench {
+@State(org.openjdk.jmh.annotations.Scope.Benchmark)
+public class ProtoBench {
 
-    private final AvroLibraryService libraryService = new AvroLibraryService();
+    private final ProtoLibraryService protoLibraryService = new ProtoLibraryService();
 
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
     @Measurement(iterations = 100, time = 3)
     @BenchmarkMode(Mode.Throughput)
-    public void serializeSmall(SmallLibrary input) {
-        libraryService.serialize(input.library);
+    public void serializeSmallThroughput(SmallLibrary input) {
+        protoLibraryService.serialize(input.library);
     }
 
     @Benchmark
@@ -28,8 +29,8 @@ public class AvroBench {
     @Fork(3)
     @Measurement(iterations = 100, time = 3)
     @BenchmarkMode(Mode.Throughput)
-    public void serializeBig(BigLibrary input) {
-        libraryService.serialize(input.library);
+    public void serializeBigThroughput(BigLibrary input) {
+        protoLibraryService.serialize(input.library);
     }
 
     @Benchmark
@@ -37,9 +38,9 @@ public class AvroBench {
     @Fork(3)
     @Measurement(iterations = 100, time = 3)
     @BenchmarkMode(Mode.Throughput)
-    public void serializeAndDeserializeSmall(SmallLibrary input, Blackhole blackhole) {
-        byte[] serialized = libraryService.serialize(input.library);
-        blackhole.consume(libraryService.deserialize(serialized));
+    public void serializeAndDeserializeSmallThroughput(SmallLibrary input, Blackhole blackhole) throws InvalidProtocolBufferException {
+        byte[] serialized = protoLibraryService.serialize(input.library);
+        blackhole.consume(protoLibraryService.deserialize(serialized));
     }
 
     @Benchmark
@@ -47,9 +48,9 @@ public class AvroBench {
     @Fork(3)
     @Measurement(iterations = 100, time = 3)
     @BenchmarkMode(Mode.Throughput)
-    public void serializeAndDeserializeBig(BigLibrary input, Blackhole blackhole) {
-        byte[] serialized = libraryService.serialize(input.library);
-        blackhole.consume(libraryService.deserialize(serialized));
+    public void serializeAndDeserializeBigThroughput(BigLibrary input, Blackhole blackhole) throws InvalidProtocolBufferException {
+        byte[] serialized = protoLibraryService.serialize(input.library);
+        blackhole.consume(protoLibraryService.deserialize(serialized));
     }
 
     @Benchmark
@@ -58,7 +59,7 @@ public class AvroBench {
     @Measurement(iterations = 1)
     @BenchmarkMode(Mode.SingleShotTime)
     public void sizeOfSerializedData(Parameters parameters) {
-        libraryService.printSerializedSize(getFixedLibrary(getManyFixedBooks(parameters.librarySize)));
+        protoLibraryService.printSerializedSize(getFixedLibrary(getManyFixedBooks(parameters.librarySize)));
     }
 
     @State(Scope.Benchmark)

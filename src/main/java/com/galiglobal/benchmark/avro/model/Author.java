@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.szymon_kaluza.protobuf_avro.avro.model;
+package com.galiglobal.benchmark.avro.model;
 
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -179,8 +179,8 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
    * Creates a new Author RecordBuilder.
    * @return A new Author RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder newBuilder() {
-    return new com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder();
+  public static Author.Builder newBuilder() {
+    return new Author.Builder();
   }
 
   /**
@@ -188,11 +188,11 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param other The existing builder to copy.
    * @return A new Author RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder newBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder other) {
+  public static Author.Builder newBuilder(Author.Builder other) {
     if (other == null) {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder();
+      return new Author.Builder();
     } else {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder(other);
+      return new Author.Builder(other);
     }
   }
 
@@ -201,11 +201,11 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param other The existing instance to copy.
    * @return A new Author RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder newBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Author other) {
+  public static Author.Builder newBuilder(Author other) {
     if (other == null) {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder();
+      return new Author.Builder();
     } else {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder(other);
+      return new Author.Builder(other);
     }
   }
 
@@ -229,7 +229,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder other) {
+    private Builder(Author.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
@@ -249,7 +249,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
      * Creates a Builder by copying an existing Author instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.szymon_kaluza.protobuf_avro.avro.model.Author other) {
+    private Builder(Author other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
@@ -279,7 +279,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder setName(CharSequence value) {
+    public Author.Builder setName(CharSequence value) {
       validate(fields()[0], value);
       this.name = value;
       fieldSetFlags()[0] = true;
@@ -299,7 +299,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder clearName() {
+    public Author.Builder clearName() {
       name = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -319,7 +319,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'surname'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder setSurname(CharSequence value) {
+    public Author.Builder setSurname(CharSequence value) {
       validate(fields()[1], value);
       this.surname = value;
       fieldSetFlags()[1] = true;
@@ -339,7 +339,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
       * Clears the value of the 'surname' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder clearSurname() {
+    public Author.Builder clearSurname() {
       surname = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -359,7 +359,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'nationality'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder setNationality(CharSequence value) {
+    public Author.Builder setNationality(CharSequence value) {
       validate(fields()[2], value);
       this.nationality = value;
       fieldSetFlags()[2] = true;
@@ -379,7 +379,7 @@ public class Author extends org.apache.avro.specific.SpecificRecordBase implemen
       * Clears the value of the 'nationality' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder clearNationality() {
+    public Author.Builder clearNationality() {
       nationality = null;
       fieldSetFlags()[2] = false;
       return this;

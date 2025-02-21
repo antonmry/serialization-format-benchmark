@@ -1,4 +1,4 @@
-package com.szymon_kaluza.protobuf_avro.avro;
+package com.galiglobal.benchmark.avro;
 
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;

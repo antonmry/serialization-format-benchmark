@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.szymon_kaluza.protobuf_avro.avro.model;
+package com.galiglobal.benchmark.avro.model;
 
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -73,7 +73,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   private CharSequence title;
-  private com.szymon_kaluza.protobuf_avro.avro.model.Author author;
+  private Author author;
   private Long pages;
   private Boolean available;
 
@@ -91,7 +91,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
    * @param pages The new value for pages
    * @param available The new value for available
    */
-  public Book(CharSequence title, com.szymon_kaluza.protobuf_avro.avro.model.Author author, Long pages, Boolean available) {
+  public Book(CharSequence title, Author author, Long pages, Boolean available) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -122,7 +122,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
   public void put(int field$, Object value$) {
     switch (field$) {
     case 0: title = (CharSequence)value$; break;
-    case 1: author = (com.szymon_kaluza.protobuf_avro.avro.model.Author)value$; break;
+    case 1: author = (Author)value$; break;
     case 2: pages = (Long)value$; break;
     case 3: available = (Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -150,7 +150,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
    * Gets the value of the 'author' field.
    * @return The value of the 'author' field.
    */
-  public com.szymon_kaluza.protobuf_avro.avro.model.Author getAuthor() {
+  public Author getAuthor() {
     return author;
   }
 
@@ -159,7 +159,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'author' field.
    * @param value the value to set.
    */
-  public void setAuthor(com.szymon_kaluza.protobuf_avro.avro.model.Author value) {
+  public void setAuthor(Author value) {
     this.author = value;
   }
 
@@ -201,8 +201,8 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
    * Creates a new Book RecordBuilder.
    * @return A new Book RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder newBuilder() {
-    return new com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder();
+  public static Book.Builder newBuilder() {
+    return new Book.Builder();
   }
 
   /**
@@ -210,11 +210,11 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
    * @param other The existing builder to copy.
    * @return A new Book RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder newBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder other) {
+  public static Book.Builder newBuilder(Book.Builder other) {
     if (other == null) {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder();
+      return new Book.Builder();
     } else {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder(other);
+      return new Book.Builder(other);
     }
   }
 
@@ -223,11 +223,11 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
    * @param other The existing instance to copy.
    * @return A new Book RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder newBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Book other) {
+  public static Book.Builder newBuilder(Book other) {
     if (other == null) {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder();
+      return new Book.Builder();
     } else {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder(other);
+      return new Book.Builder(other);
     }
   }
 
@@ -239,8 +239,8 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
     implements org.apache.avro.data.RecordBuilder<Book> {
 
     private CharSequence title;
-    private com.szymon_kaluza.protobuf_avro.avro.model.Author author;
-    private com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder authorBuilder;
+    private Author author;
+    private Author.Builder authorBuilder;
     private Long pages;
     private Boolean available;
 
@@ -253,7 +253,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder other) {
+    private Builder(Book.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.title)) {
         this.title = data().deepCopy(fields()[0].schema(), other.title);
@@ -264,7 +264,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
       if (other.hasAuthorBuilder()) {
-        this.authorBuilder = com.szymon_kaluza.protobuf_avro.avro.model.Author.newBuilder(other.getAuthorBuilder());
+        this.authorBuilder = Author.newBuilder(other.getAuthorBuilder());
       }
       if (isValidValue(fields()[2], other.pages)) {
         this.pages = data().deepCopy(fields()[2].schema(), other.pages);
@@ -280,7 +280,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
      * Creates a Builder by copying an existing Book instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.szymon_kaluza.protobuf_avro.avro.model.Book other) {
+    private Builder(Book other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.title)) {
         this.title = data().deepCopy(fields()[0].schema(), other.title);
@@ -315,7 +315,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'title'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder setTitle(CharSequence value) {
+    public Book.Builder setTitle(CharSequence value) {
       validate(fields()[0], value);
       this.title = value;
       fieldSetFlags()[0] = true;
@@ -335,7 +335,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'title' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder clearTitle() {
+    public Book.Builder clearTitle() {
       title = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -345,7 +345,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * Gets the value of the 'author' field.
       * @return The value.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author getAuthor() {
+    public Author getAuthor() {
       return author;
     }
 
@@ -355,7 +355,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'author'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder setAuthor(com.szymon_kaluza.protobuf_avro.avro.model.Author value) {
+    public Book.Builder setAuthor(Author value) {
       validate(fields()[1], value);
       this.authorBuilder = null;
       this.author = value;
@@ -375,12 +375,12 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
      * Gets the Builder instance for the 'author' field and creates one if it doesn't exist yet.
      * @return This builder.
      */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder getAuthorBuilder() {
+    public Author.Builder getAuthorBuilder() {
       if (authorBuilder == null) {
         if (hasAuthor()) {
-          setAuthorBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Author.newBuilder(author));
+          setAuthorBuilder(Author.newBuilder(author));
         } else {
-          setAuthorBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Author.newBuilder());
+          setAuthorBuilder(Author.newBuilder());
         }
       }
       return authorBuilder;
@@ -392,7 +392,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
      * @return This builder.
      */
 
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder setAuthorBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Author.Builder value) {
+    public Book.Builder setAuthorBuilder(Author.Builder value) {
       clearAuthor();
       authorBuilder = value;
       return this;
@@ -410,7 +410,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'author' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder clearAuthor() {
+    public Book.Builder clearAuthor() {
       author = null;
       authorBuilder = null;
       fieldSetFlags()[1] = false;
@@ -431,7 +431,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'pages'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder setPages(Long value) {
+    public Book.Builder setPages(Long value) {
       validate(fields()[2], value);
       this.pages = value;
       fieldSetFlags()[2] = true;
@@ -451,7 +451,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'pages' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder clearPages() {
+    public Book.Builder clearPages() {
       pages = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -471,7 +471,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'available'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder setAvailable(Boolean value) {
+    public Book.Builder setAvailable(Boolean value) {
       validate(fields()[3], value);
       this.available = value;
       fieldSetFlags()[3] = true;
@@ -491,7 +491,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'available' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Book.Builder clearAvailable() {
+    public Book.Builder clearAvailable() {
       available = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -511,7 +511,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
             throw e;
           }
         } else {
-          record.author = fieldSetFlags()[1] ? this.author : (com.szymon_kaluza.protobuf_avro.avro.model.Author) defaultValue(fields()[1]);
+          record.author = fieldSetFlags()[1] ? this.author : (Author) defaultValue(fields()[1]);
         }
         record.pages = fieldSetFlags()[2] ? this.pages : (Long) defaultValue(fields()[2]);
         record.available = fieldSetFlags()[3] ? this.available : (Boolean) defaultValue(fields()[3]);
@@ -588,7 +588,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
       }
 
       if (this.author == null) {
-        this.author = new com.szymon_kaluza.protobuf_avro.avro.model.Author();
+        this.author = new Author();
       }
       this.author.customDecode(in);
 
@@ -620,7 +620,7 @@ public class Book extends org.apache.avro.specific.SpecificRecordBase implements
 
         case 1:
           if (this.author == null) {
-            this.author = new com.szymon_kaluza.protobuf_avro.avro.model.Author();
+            this.author = new Author();
           }
           this.author.customDecode(in);
           break;

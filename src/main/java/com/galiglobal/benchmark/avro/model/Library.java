@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.szymon_kaluza.protobuf_avro.avro.model;
+package com.galiglobal.benchmark.avro.model;
 
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -73,7 +73,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
   }
 
   private CharSequence address;
-  private java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> books;
+  private java.util.List<Book> books;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -87,7 +87,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param address The new value for address
    * @param books The new value for books
    */
-  public Library(CharSequence address, java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> books) {
+  public Library(CharSequence address, java.util.List<Book> books) {
     this.address = address;
     this.books = books;
   }
@@ -114,7 +114,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
   public void put(int field$, Object value$) {
     switch (field$) {
     case 0: address = (CharSequence)value$; break;
-    case 1: books = (java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book>)value$; break;
+    case 1: books = (java.util.List<Book>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -140,7 +140,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
    * Gets the value of the 'books' field.
    * @return The value of the 'books' field.
    */
-  public java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> getBooks() {
+  public java.util.List<Book> getBooks() {
     return books;
   }
 
@@ -149,7 +149,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'books' field.
    * @param value the value to set.
    */
-  public void setBooks(java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> value) {
+  public void setBooks(java.util.List<Book> value) {
     this.books = value;
   }
 
@@ -157,8 +157,8 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
    * Creates a new Library RecordBuilder.
    * @return A new Library RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder newBuilder() {
-    return new com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder();
+  public static Library.Builder newBuilder() {
+    return new Library.Builder();
   }
 
   /**
@@ -166,11 +166,11 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param other The existing builder to copy.
    * @return A new Library RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder newBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder other) {
+  public static Library.Builder newBuilder(Library.Builder other) {
     if (other == null) {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder();
+      return new Library.Builder();
     } else {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder(other);
+      return new Library.Builder(other);
     }
   }
 
@@ -179,11 +179,11 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param other The existing instance to copy.
    * @return A new Library RecordBuilder
    */
-  public static com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder newBuilder(com.szymon_kaluza.protobuf_avro.avro.model.Library other) {
+  public static Library.Builder newBuilder(Library other) {
     if (other == null) {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder();
+      return new Library.Builder();
     } else {
-      return new com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder(other);
+      return new Library.Builder(other);
     }
   }
 
@@ -195,7 +195,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
     implements org.apache.avro.data.RecordBuilder<Library> {
 
     private CharSequence address;
-    private java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> books;
+    private java.util.List<Book> books;
 
     /** Creates a new Builder */
     private Builder() {
@@ -206,7 +206,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder other) {
+    private Builder(Library.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.address)) {
         this.address = data().deepCopy(fields()[0].schema(), other.address);
@@ -222,7 +222,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
      * Creates a Builder by copying an existing Library instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.szymon_kaluza.protobuf_avro.avro.model.Library other) {
+    private Builder(Library other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.address)) {
         this.address = data().deepCopy(fields()[0].schema(), other.address);
@@ -248,7 +248,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'address'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder setAddress(CharSequence value) {
+    public Library.Builder setAddress(CharSequence value) {
       validate(fields()[0], value);
       this.address = value;
       fieldSetFlags()[0] = true;
@@ -268,7 +268,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'address' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder clearAddress() {
+    public Library.Builder clearAddress() {
       address = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -278,7 +278,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       * Gets the value of the 'books' field.
       * @return The value.
       */
-    public java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> getBooks() {
+    public java.util.List<Book> getBooks() {
       return books;
     }
 
@@ -288,7 +288,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'books'.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder setBooks(java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> value) {
+    public Library.Builder setBooks(java.util.List<Book> value) {
       validate(fields()[1], value);
       this.books = value;
       fieldSetFlags()[1] = true;
@@ -308,7 +308,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'books' field.
       * @return This builder.
       */
-    public com.szymon_kaluza.protobuf_avro.avro.model.Library.Builder clearBooks() {
+    public Library.Builder clearBooks() {
       books = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -320,7 +320,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       try {
         Library record = new Library();
         record.address = fieldSetFlags()[0] ? this.address : (CharSequence) defaultValue(fields()[0]);
-        record.books = fieldSetFlags()[1] ? this.books : (java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book>) defaultValue(fields()[1]);
+        record.books = fieldSetFlags()[1] ? this.books : (java.util.List<Book>) defaultValue(fields()[1]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -365,7 +365,7 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
     out.writeArrayStart();
     out.setItemCount(size0);
     long actualSize0 = 0;
-    for (com.szymon_kaluza.protobuf_avro.avro.model.Book e0: this.books) {
+    for (Book e0: this.books) {
       actualSize0++;
       out.startItem();
       e0.customEncode(out);
@@ -389,17 +389,17 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
       }
 
       long size0 = in.readArrayStart();
-      java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> a0 = this.books;
+      java.util.List<Book> a0 = this.books;
       if (a0 == null) {
-        a0 = new SpecificData.Array<com.szymon_kaluza.protobuf_avro.avro.model.Book>((int)size0, SCHEMA$.getField("books").schema());
+        a0 = new SpecificData.Array<Book>((int)size0, SCHEMA$.getField("books").schema());
         this.books = a0;
       } else a0.clear();
-      SpecificData.Array<com.szymon_kaluza.protobuf_avro.avro.model.Book> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<com.szymon_kaluza.protobuf_avro.avro.model.Book>)a0 : null);
+      SpecificData.Array<Book> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<Book>)a0 : null);
       for ( ; 0 < size0; size0 = in.arrayNext()) {
         for ( ; size0 != 0; size0--) {
-          com.szymon_kaluza.protobuf_avro.avro.model.Book e0 = (ga0 != null ? ga0.peek() : null);
+          Book e0 = (ga0 != null ? ga0.peek() : null);
           if (e0 == null) {
-            e0 = new com.szymon_kaluza.protobuf_avro.avro.model.Book();
+            e0 = new Book();
           }
           e0.customDecode(in);
           a0.add(e0);
@@ -420,17 +420,17 @@ public class Library extends org.apache.avro.specific.SpecificRecordBase impleme
 
         case 1:
           long size0 = in.readArrayStart();
-          java.util.List<com.szymon_kaluza.protobuf_avro.avro.model.Book> a0 = this.books;
+          java.util.List<Book> a0 = this.books;
           if (a0 == null) {
-            a0 = new SpecificData.Array<com.szymon_kaluza.protobuf_avro.avro.model.Book>((int)size0, SCHEMA$.getField("books").schema());
+            a0 = new SpecificData.Array<Book>((int)size0, SCHEMA$.getField("books").schema());
             this.books = a0;
           } else a0.clear();
-          SpecificData.Array<com.szymon_kaluza.protobuf_avro.avro.model.Book> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<com.szymon_kaluza.protobuf_avro.avro.model.Book>)a0 : null);
+          SpecificData.Array<Book> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<Book>)a0 : null);
           for ( ; 0 < size0; size0 = in.arrayNext()) {
             for ( ; size0 != 0; size0--) {
-              com.szymon_kaluza.protobuf_avro.avro.model.Book e0 = (ga0 != null ? ga0.peek() : null);
+              Book e0 = (ga0 != null ? ga0.peek() : null);
               if (e0 == null) {
-                e0 = new com.szymon_kaluza.protobuf_avro.avro.model.Book();
+                e0 = new Book();
               }
               e0.customDecode(in);
               a0.add(e0);

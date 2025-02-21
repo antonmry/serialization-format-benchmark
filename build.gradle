@@ -3,7 +3,7 @@ plugins {
     id 'me.champeau.jmh' version '0.6.8'
 }
 
-group = 'com.szymon_kaluza'
+group = 'com.galiglobal.benchmark'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '23'
 
