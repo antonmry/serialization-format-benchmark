@@ -11,8 +11,9 @@ public class BenchmarkRunner {
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(ProtoBenchSimple.class.getSimpleName())
-                .include(AvroBenchSimple.class.getSimpleName())
+//                .include(ProtoBenchSimple.class.getSimpleName())
+//                .include(AvroBenchSimple.class.getSimpleName())
+                .include(ProtoLogsBench.class.getSimpleName())
                 .verbosity(VerboseMode.EXTRA)
                 .addProfiler(GCProfiler.class)
                 .build();

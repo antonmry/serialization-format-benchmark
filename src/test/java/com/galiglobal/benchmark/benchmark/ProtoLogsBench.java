@@ -11,14 +11,42 @@ import java.util.List;
 import static com.galiglobal.benchmark.benchmark.ProtoBenchmarkLogsFactory.*;
 
 @State(Scope.Benchmark)
-public class ProtoBenchSimple {
+public class ProtoLogsBench {
 
     private final ProtoScopeLogsService protoScopeLogsService = new ProtoScopeLogsService();
 
     @Benchmark
-    @Warmup(iterations = 1, time = 3)
+    @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 3, time = 3)
+    @Measurement(iterations = 100, time = 3)
+    @BenchmarkMode(Mode.Throughput)
+    public void serializeSmallThroughput(SmallScopeLogs input) {
+        protoScopeLogsService.serialize(input.scopeLogs);
+    }
+
+    @Benchmark
+    @Warmup(iterations = 3, time = 3)
+    @Fork(3)
+    @Measurement(iterations = 100, time = 3)
+    @BenchmarkMode(Mode.Throughput)
+    public void serializeBigThroughput(BigScopeLogs input) {
+        protoScopeLogsService.serialize(input.scopeLogs);
+    }
+
+    @Benchmark
+    @Warmup(iterations = 3, time = 3)
+    @Fork(3)
+    @Measurement(iterations = 100, time = 3)
+    @BenchmarkMode(Mode.Throughput)
+    public void serializeAndDeserializeSmallThroughput(SmallScopeLogs input, Blackhole blackhole) throws InvalidProtocolBufferException {
+        byte[] serialized = protoScopeLogsService.serialize(input.scopeLogs);
+        blackhole.consume(protoScopeLogsService.deserialize(serialized));
+    }
+
+    @Benchmark
+    @Warmup(iterations = 3, time = 3)
+    @Fork(3)
+    @Measurement(iterations = 100, time = 3)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeBigThroughput(BigScopeLogs input, Blackhole blackhole) throws InvalidProtocolBufferException {
         byte[] serialized = protoScopeLogsService.serialize(input.scopeLogs);
