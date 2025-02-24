@@ -11,12 +11,13 @@ public class BenchmarkRunner {
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-//                .include(ProtoBenchSimple.class.getSimpleName())
-//                .include(AvroBenchSimple.class.getSimpleName())
-                .include(ProtoLogsBench.class.getSimpleName())
-                .verbosity(VerboseMode.EXTRA)
-                .addProfiler(GCProfiler.class)
-                .build();
+            //.include(ProtoBenchSimple.class.getSimpleName())
+            //.include(ThriftBenchSimple.class.getSimpleName())
+            .include(ProtoLogsBench.class.getSimpleName())
+            .include(ThriftLogsBench.class.getSimpleName())
+            .verbosity(VerboseMode.EXTRA)
+            .addProfiler(GCProfiler.class)
+            .build();
 
         new Runner(opt).run();
     }
