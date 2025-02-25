@@ -15,6 +15,7 @@ public class BenchmarkRunner {
 //            .include(ThriftBenchSimple.class.getSimpleName())
             .include(ProtoLogsBench.class.getSimpleName())
             .include(ThriftLogsBench.class.getSimpleName())
+            .include(AvroLogsBench.class.getSimpleName())
             .verbosity(VerboseMode.NORMAL)
             .addProfiler(GCProfiler.class)
             .resultFormat(org.openjdk.jmh.results.format.ResultFormatType.JSON)

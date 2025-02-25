@@ -11,10 +11,10 @@ public final class BenchmarkConfig {
     /**
      * Number of iterations for benchmark measurements
      */
-    public static final int MEASUREMENT_ITERATIONS = 10;
+    public static final int MEASUREMENT_ITERATIONS = 1;
 
     /**
      * Time in seconds for each measurement iteration
      */
-    public static final int MEASUREMENT_TIME = 3;
+    public static final int MEASUREMENT_TIME = 1;
 }
