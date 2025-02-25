@@ -184,20 +184,12 @@
 
                         // Store complete information
                         if (!benchmarks.sizeOfSerializedData.details[format]) {
-                            benchmarks.sizeOfSerializedData.details[format] = [];
+                            benchmarks.sizeOfSerializedData.details[format] = {};
                         }
-                        benchmarks.sizeOfSerializedData.details[format].push({
+                        benchmarks.sizeOfSerializedData.details[format][scopeLogsSize] = {
                             score: score,
-                            size: scopeLogsSize,
                             type: scopeType
-                        });
-
-                        // Also store in the original structure
-                        if (scopeType === 'SMALL') {
-                            benchmarks.sizeOfSerializedData.small[format] = score;
-                        } else if (scopeType === 'BIG') {
-                            benchmarks.sizeOfSerializedData.big[format] = score;
-                        }
+                        };
 
                     }
                 });
@@ -219,28 +211,44 @@
                 return chart;
             }
 
-            // Process data to show one value per format
+            // Get all unique log sizes and sort them
+            const allSizes = new Set();
+            Object.values(benchmarks.sizeOfSerializedData.details).forEach(formatData => {
+                Object.keys(formatData).forEach(size => allSizes.add(size));
+            });
+            const logSizes = Array.from(allSizes).sort((a, b) => parseInt(a) - parseInt(b));
+
+            // Process data for each format
+            const formats = Object.keys(benchmarks.sizeOfSerializedData.details);
             const formatData = {};
-            Object.entries(benchmarks.sizeOfSerializedData.details).forEach(([format, data]) => {
-                if (!data || data.length === 0) {
-                    console.warn(`No data available for format: ${format}`);
-                    return;
-                }
-                formatData[format] = {
-                    score: data[0].score,
-                    size: data[0].size
-                };
+            formats.forEach(format => {
+                formatData[format] = {};
+                logSizes.forEach(size => {
+                    if (benchmarks.sizeOfSerializedData.details[format][size]) {
+                        formatData[format][size] = benchmarks.sizeOfSerializedData.details[format][size];
+                    }
+                });
             });
 
-            // Sort formats by size (ascending)
-            const formats = Object.entries(formatData)
-                .sort(([,a], [,b]) => a.score - b.score)
-                .map(([format]) => format);
+            const colors = ['#4299E1', '#48BB78', '#ECC94B', '#F56565', '#9F7AEA', '#ED8936', '#38B2AC'];
 
-            const scores = formats.map(f => formatData[f].score);
-            const minScore = scores[0]; // First score is the minimum after sorting
-
-            const colors = ['#3182CE', '#38A169', '#DD6B20', '#E53E3E'];
+            // Create series for each log size
+            const series = logSizes.map((size, index) => ({
+                name: `${size} logs`,
+                type: 'bar',
+                data: formats.map(format => ({
+                    value: formatData[format][size]?.score || 0,
+                    itemStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: colors[index % colors.length]
+                        }, {
+                            offset: 1,
+                            color: colors[index % colors.length] + '80'
+                        }])
+                    }
+                }))
+            }));
 
             const option = {
                 animation: true,
@@ -265,38 +273,59 @@
                     formatter: function(params) {
                         try {
                             const format = params[0].name;
-                            const data = formatData[format];
-                            const rank = formats.indexOf(format) + 1;
-                            const percentageDiff = ((data.score - minScore) / minScore * 100).toFixed(1);
+                            let result = `<div style="font-weight:600;margin-bottom:8px;color:#2c3e50">${format}</div>`;
+                            result += '<div style="color:#666;line-height:1.6">';
 
-                            return `<div style="font-weight:600;margin-bottom:8px">${format}</div>
-                                   <div style="color:#666;line-height:1.6">
-                                     <div style="margin-bottom:4px">
-                                        <span style="color:#2c3e50">Rank:</span> ${rank} of ${formats.length}
-                                     </div>
-                                     <div style="margin-bottom:4px">
-                                        <span style="color:#2c3e50">Size:</span> ${data.score.toLocaleString()} bytes
-                                     </div>
-                                     <div style="color:#666;margin-top:4px">Uses ${percentageDiff}% more bytes than ${formats[0]}</div>
-                                   </div>`;
+                            // Sort params by value for better readability
+                            params.sort((a, b) => a.value - b.value);
+
+                            params.forEach(param => {
+                                if (param.value > 0) {
+                                    result += `<div style="margin-bottom:6px;display:flex;align-items:center">
+                                        <span style="display:inline-block;margin-right:8px;width:8px;height:8px;background:${param.color};border-radius:50%"></span>
+                                        <span style="flex:1">
+                                            <span style="color:#2c3e50;font-weight:500">${param.seriesName}:</span> 
+                                            <span style="float:right">${param.value.toLocaleString()} bytes</span>
+                                        </span>
+                                    </div>`;
+                                }
+                            });
+
+                            result += '</div>';
+                            return result;
                         } catch (e) {
                             console.error('Error formatting tooltip:', e);
                             return 'Error displaying data';
                         }
                     },
-                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                    borderColor: '#eee',
+                    backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                    borderColor: '#e2e8f0',
                     borderWidth: 1,
-                    padding: [10, 15],
+                    padding: [12, 16],
                     textStyle: {
                         color: '#2c3e50',
                         fontSize: 13
                     },
-                    extraCssText: 'box-shadow: 0 0 8px rgba(0,0,0,0.1); border-radius: 4px;'
+                    extraCssText: 'box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 6px;'
+                },
+                legend: {
+                    type: 'scroll',
+                    top: '20px',
+                    textStyle: {
+                        color: '#2c3e50',
+                        fontSize: 12,
+                        fontWeight: 500
+                    },
+                    itemGap: 20,
+                    itemWidth: 14,
+                    itemHeight: 14,
+                    pageButtonPosition: 'end',
+                    pageButtonItemGap: 5,
+                    pageButtonGap: 5
                 },
                 grid: {
-                    left: '10%',
-                    right: '5%',
+                    left: '8%',
+                    right: '8%',
                     top: '60px',
                     bottom: '40px',
                     containLabel: true
@@ -330,40 +359,29 @@
                         }
                     }
                 },
-                series: [{
-                    type: 'bar',
-                    data: formats.map((format, index) => ({
-                        value: formatData[format].score,
-                        itemStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: colors[index]
-                            }, {
-                                offset: 1,
-                                color: colors[index] + '90'
-                            }]),
-                            borderRadius: [6, 6, 0, 0]
-                        }
-                    })),
-                    barWidth: '50%',
+                series: series.map(s => ({
+                    ...s,
+                    barGap: '8%',
+                    barCategoryGap: '20%',
+                    barWidth: '20%',
+                    itemStyle: {
+                        ...s.data[0].itemStyle,
+                        borderRadius: [6, 6, 0, 0],
+                        opacity: 0.9
+                    },
                     label: {
-                        show: true,
-                        position: 'top',
-                        formatter: function(params) {
-                            const data = formatData[params.name];
-                            return data.score.toLocaleString();
-                        },
-                        fontSize: 12,
-                        color: '#2c3e50',
-                        distance: 10
+                        show: false
                     },
                     emphasis: {
                         itemStyle: {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(0,0,0,0.2)'
-                        }
+                            shadowBlur: 12,
+                            shadowOffsetY: 4,
+                            shadowColor: 'rgba(0,0,0,0.2)',
+                            opacity: 1
+                        },
+                        focus: 'series'
                     }
-                }]
+                }))
             };
 
             chart.setOption(option);
