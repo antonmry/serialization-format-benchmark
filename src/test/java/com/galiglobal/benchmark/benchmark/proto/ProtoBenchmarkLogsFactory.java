@@ -1,4 +1,4 @@
-package com.galiglobal.benchmark.benchmark;
+package com.galiglobal.benchmark.benchmark.proto;
 
 import com.galiglobal.benchmark.proto.otel.common.v1.AnyValue;
 import com.galiglobal.benchmark.proto.otel.logs.v1.LogRecord;

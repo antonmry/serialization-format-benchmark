@@ -1,3 +1,10 @@
+
+
+- [ ] Add flatbuffers
+- [ ] Visualization using Apache eCharts
+- [ ] Final run
+- [ ] Proper README.md
+
 protoc --java_out=logs/ *.proto
 
 

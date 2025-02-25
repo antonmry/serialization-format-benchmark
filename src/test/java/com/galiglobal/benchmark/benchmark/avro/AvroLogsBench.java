@@ -1,4 +1,4 @@
-package com.galiglobal.benchmark.benchmark;
+package com.galiglobal.benchmark.benchmark.avro;
 
 import com.galiglobal.benchmark.application.AvroScopeLogsService;
 import com.galiglobal.benchmark.avro.otel.ScopeLogs;
@@ -8,9 +8,8 @@ import org.openjdk.jmh.infra.Blackhole;
 import java.io.IOException;
 import java.util.List;
 
-import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.MEASUREMENT_ITERATIONS;
-import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.MEASUREMENT_TIME;
-import static com.galiglobal.benchmark.benchmark.AvroBenchmarkLogsFactory.*;
+import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.*;
+import static com.galiglobal.benchmark.benchmark.avro.AvroBenchmarkLogsFactory.*;
 
 @State(Scope.Benchmark)
 public class AvroLogsBench {
@@ -18,8 +17,8 @@ public class AvroLogsBench {
     private final AvroScopeLogsService avroScopeLogsService = new AvroScopeLogsService();
 
     @Benchmark
-    @Warmup(iterations = 3, time = 3)
-    @Fork(3)
+    @Warmup(iterations = WARMUP_ITERATIONS, time = WARMUP_TIME)
+    @Fork(FORK_COUNT)
     @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeSmallThroughput(SmallScopeLogs input) throws IOException {
@@ -27,8 +26,8 @@ public class AvroLogsBench {
     }
 
     @Benchmark
-    @Warmup(iterations = 3, time = 3)
-    @Fork(3)
+    @Warmup(iterations = WARMUP_ITERATIONS, time = WARMUP_TIME)
+    @Fork(FORK_COUNT)
     @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeBigThroughput(BigScopeLogs input) throws IOException {
@@ -36,8 +35,8 @@ public class AvroLogsBench {
     }
 
     @Benchmark
-    @Warmup(iterations = 3, time = 3)
-    @Fork(3)
+    @Warmup(iterations = WARMUP_ITERATIONS, time = WARMUP_TIME)
+    @Fork(FORK_COUNT)
     @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeSmallThroughput(SmallScopeLogs input, Blackhole blackhole) throws IOException {
@@ -46,8 +45,8 @@ public class AvroLogsBench {
     }
 
     @Benchmark
-    @Warmup(iterations = 3, time = 3)
-    @Fork(3)
+    @Warmup(iterations = WARMUP_ITERATIONS, time = WARMUP_TIME)
+    @Fork(FORK_COUNT)
     @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeBigThroughput(BigScopeLogs input, Blackhole blackhole) throws IOException {

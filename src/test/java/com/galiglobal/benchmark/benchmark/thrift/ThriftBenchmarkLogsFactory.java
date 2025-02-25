@@ -1,4 +1,4 @@
-package com.galiglobal.benchmark.benchmark;
+package com.galiglobal.benchmark.benchmark.thrift;
 
 import com.galiglobal.benchmark.thrift.otel.common.v1.AnyValue;
 import com.galiglobal.benchmark.thrift.otel.logs.v1.LogRecord;

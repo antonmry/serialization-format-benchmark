@@ -1,4 +1,4 @@
-package com.galiglobal.benchmark.benchmark;
+package com.galiglobal.benchmark.benchmark.json;
 
 import com.galiglobal.benchmark.json.otel.common.v1.AnyValue;
 import com.galiglobal.benchmark.json.otel.logs.v1.LogRecord;

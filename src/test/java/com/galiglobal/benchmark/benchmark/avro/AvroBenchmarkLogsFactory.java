@@ -1,4 +1,4 @@
-package com.galiglobal.benchmark.benchmark;
+package com.galiglobal.benchmark.benchmark.avro;
 
 import com.galiglobal.benchmark.avro.otel.ScopeLogs;
 import com.galiglobal.benchmark.avro.otel.LogRecord;

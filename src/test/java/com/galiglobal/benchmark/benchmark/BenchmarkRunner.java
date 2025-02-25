@@ -1,5 +1,9 @@
 package com.galiglobal.benchmark.benchmark;
 
+import com.galiglobal.benchmark.benchmark.avro.AvroLogsBench;
+import com.galiglobal.benchmark.benchmark.json.JsonLogsBench;
+import com.galiglobal.benchmark.benchmark.proto.ProtoLogsBench;
+import com.galiglobal.benchmark.benchmark.thrift.ThriftLogsBench;
 import org.openjdk.jmh.profile.GCProfiler;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;

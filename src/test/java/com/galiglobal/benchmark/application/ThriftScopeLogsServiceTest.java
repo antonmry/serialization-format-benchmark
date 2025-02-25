@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.galiglobal.benchmark.benchmark.ThriftBenchmarkLogsFactory.getLogRecord;
-import static com.galiglobal.benchmark.benchmark.ThriftBenchmarkLogsFactory.getScopeLogs;
+import static com.galiglobal.benchmark.benchmark.thrift.ThriftBenchmarkLogsFactory.getLogRecord;
+import static com.galiglobal.benchmark.benchmark.thrift.ThriftBenchmarkLogsFactory.getScopeLogs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
