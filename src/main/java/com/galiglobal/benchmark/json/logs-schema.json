@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpenTelemetry Logs Schema",
+  "type": "object",
+  "description": "Schema for OpenTelemetry logs data model",
+  "definitions": {
+    "AnyValue": {
+      "type": "object",
+      "description": "Represents any type of attribute value",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "stringValue": { "type": "string" }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "boolValue": { "type": "boolean" }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "intValue": { "type": "integer", "format": "int64" }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "doubleValue": { "type": "number", "format": "double" }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "arrayValue": { "$ref": "#/definitions/ArrayValue" }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kvlistValue": { "$ref": "#/definitions/KeyValueList" }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "bytesValue": { "type": "string", "contentEncoding": "base64" }
+          }
+        }
+      ]
+    },
+    "ArrayValue": {
+      "type": "object",
+      "description": "A list of AnyValue messages",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AnyValue" }
+        }
+      }
+    },
+    "KeyValue": {
+      "type": "object",
+      "description": "Key-value pair for attributes",
+      "required": ["key", "value"],
+      "properties": {
+        "key": { "type": "string" },
+        "value": { "$ref": "#/definitions/AnyValue" }
+      }
+    },
+    "KeyValueList": {
+      "type": "object",
+      "description": "A list of KeyValue pairs",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/KeyValue" }
+        }
+      }
+    },
+    "InstrumentationScope": {
+      "type": "object",
+      "description": "Instrumentation scope information",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "attributes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/KeyValue" }
+        },
+        "droppedAttributesCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Resource information",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/KeyValue" }
+        },
+        "droppedAttributesCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "SeverityNumber": {
+      "type": "string",
+      "enum": [
+        "SEVERITY_NUMBER_UNSPECIFIED",
+        "SEVERITY_NUMBER_TRACE",
+        "SEVERITY_NUMBER_TRACE2",
+        "SEVERITY_NUMBER_TRACE3",
+        "SEVERITY_NUMBER_TRACE4",
+        "SEVERITY_NUMBER_DEBUG",
+        "SEVERITY_NUMBER_DEBUG2",
+        "SEVERITY_NUMBER_DEBUG3",
+        "SEVERITY_NUMBER_DEBUG4",
+        "SEVERITY_NUMBER_INFO",
+        "SEVERITY_NUMBER_INFO2",
+        "SEVERITY_NUMBER_INFO3",
+        "SEVERITY_NUMBER_INFO4",
+        "SEVERITY_NUMBER_WARN",
+        "SEVERITY_NUMBER_WARN2",
+        "SEVERITY_NUMBER_WARN3",
+        "SEVERITY_NUMBER_WARN4",
+        "SEVERITY_NUMBER_ERROR",
+        "SEVERITY_NUMBER_ERROR2",
+        "SEVERITY_NUMBER_ERROR3",
+        "SEVERITY_NUMBER_ERROR4",
+        "SEVERITY_NUMBER_FATAL",
+        "SEVERITY_NUMBER_FATAL2",
+        "SEVERITY_NUMBER_FATAL3",
+        "SEVERITY_NUMBER_FATAL4"
+      ]
+    },
+    "LogRecord": {
+      "type": "object",
+      "description": "A log record according to OpenTelemetry Log Data Model",
+      "properties": {
+        "timeUnixNano": {
+          "type": "string",
+          "description": "Time when the event occurred in UNIX Epoch nanoseconds"
+        },
+        "observedTimeUnixNano": {
+          "type": "string",
+          "description": "Time when the event was observed in UNIX Epoch nanoseconds"
+        },
+        "severityNumber": { "$ref": "#/definitions/SeverityNumber" },
+        "severityText": { "type": "string" },
+        "body": { "$ref": "#/definitions/AnyValue" },
+        "attributes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/KeyValue" }
+        },
+        "droppedAttributesCount": { "type": "integer", "minimum": 0 },
+        "flags": { "type": "integer" },
+        "traceId": { "type": "string", "pattern": "^[0-9a-fA-F]{32}$" },
+        "spanId": { "type": "string", "pattern": "^[0-9a-fA-F]{16}$" },
+        "eventName": { 
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "ScopeLogs": {
+      "type": "object",
+      "description": "A collection of Logs produced by a Scope",
+      "properties": {
+        "scope": { "$ref": "#/definitions/InstrumentationScope" },
+        "logRecords": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/LogRecord" }
+        },
+        "schemaUrl": { "type": "string", "format": "uri" }
+      }
+    },
+    "ResourceLogs": {
+      "type": "object",
+      "description": "A collection of ScopeLogs from a Resource",
+      "properties": {
+        "resource": { "$ref": "#/definitions/Resource" },
+        "scopeLogs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ScopeLogs" }
+        },
+        "schemaUrl": { "type": "string", "format": "uri" }
+      }
+    }
+  },
+  "properties": {
+    "resourceLogs": {
+      "type": "array",
+      "description": "An array of ResourceLogs",
+      "items": { "$ref": "#/definitions/ResourceLogs" }
+    }
+  }
+}

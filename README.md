@@ -17,3 +17,4 @@ avro-tools compile schema \
   "$AVRO_DIR/ResourceLogs.avsc" \
   "$AVRO_DIR/LogsData.avsc" \
   "$AVRO_DIR"
+
