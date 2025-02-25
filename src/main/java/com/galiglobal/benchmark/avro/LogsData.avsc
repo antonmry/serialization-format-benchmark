@@ -1,0 +1,8 @@
+{
+  "namespace": "com.galiglobal.benchmark.avro",
+  "type": "record",
+  "name": "LogsData",
+  "fields": [
+    {"name": "resourceLogs", "type": {"type": "array", "items": "ResourceLogs"}, "default": []}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "namespace": "com.galiglobal.benchmark.avro",
+  "type": "record",
+  "name": "LogRecord",
+  "fields": [
+    {"name": "timeUnixNano", "type": "long"},
+    {"name": "severityNumber", "type": "com.galiglobal.benchmark.avro.SeverityNumber", "default": "SEVERITY_NUMBER_UNSPECIFIED"},
+    {"name": "severityText", "type": ["null", "string"], "default": null},
+    {"name": "body", "type": ["null", "com.galiglobal.benchmark.avro.AnyValue"], "default": null},
+    {"name": "attributes", "type": {"type": "array", "items": "com.galiglobal.benchmark.avro.KeyValue"}, "default": []},
+    {"name": "droppedAttributesCount", "type": "int", "default": 0},
+    {"name": "flags", "type": "int", "default": 0},
+    {"name": "traceId", "type": ["null", "bytes"], "default": null},
+    {"name": "spanId", "type": ["null", "bytes"], "default": null}
+  ]
+}

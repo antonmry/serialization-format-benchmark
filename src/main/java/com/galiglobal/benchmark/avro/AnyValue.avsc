@@ -1,0 +1,27 @@
+{
+  "namespace": "com.galiglobal.benchmark.avro",
+  "type": "record",
+  "name": "AnyValue",
+  "fields": [
+    {"name": "stringValue", "type": ["null", "string"], "default": null},
+    {"name": "boolValue", "type": ["null", "boolean"], "default": null},
+    {"name": "intValue", "type": ["null", "long"], "default": null},
+    {"name": "doubleValue", "type": ["null", "double"], "default": null},
+    {"name": "arrayValue", "type": ["null", {"type": "record", "name": "ArrayValue", "fields": [{"name": "values", "type": {"type": "array", "items": "AnyValue"}, "default": []}]}], "default": null},
+    {"name": "kvlistValue", "type": ["null", {
+      "type": "record",
+      "name": "KeyValueList",
+      "fields": [
+        {"name": "values", "type": {"type": "array", "items": {
+          "type": "record",
+          "name": "KeyValue",
+          "fields": [
+            {"name": "key", "type": "string"},
+            {"name": "value", "type": "AnyValue"}
+          ]
+        }}, "default": []}
+      ]
+    }], "default": null},
+    {"name": "bytesValue", "type": ["null", "bytes"], "default": null}
+  ]
+}

@@ -1,4 +1,5 @@
 benchmark-results.json
+.junie/guidelines.md
 HELP.md
 .gradle
 build/

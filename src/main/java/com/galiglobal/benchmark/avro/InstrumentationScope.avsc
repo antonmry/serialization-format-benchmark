@@ -1,0 +1,11 @@
+{
+  "namespace": "com.galiglobal.benchmark.avro",
+  "type": "record",
+  "name": "InstrumentationScope",
+  "fields": [
+    {"name": "name", "type": "string"},
+    {"name": "version", "type": ["null", "string"], "default": null},
+    {"name": "attributes", "type": {"type": "array", "items": "com.galiglobal.benchmark.avro.KeyValue"}, "default": []},
+    {"name": "droppedAttributesCount", "type": "int", "default": 0}
+  ]
+}

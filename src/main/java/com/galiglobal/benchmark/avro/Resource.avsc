@@ -1,0 +1,9 @@
+{
+  "namespace": "com.galiglobal.benchmark.avro",
+  "type": "record",
+  "name": "Resource",
+  "fields": [
+    {"name": "attributes", "type": {"type": "array", "items": "com.galiglobal.benchmark.avro.KeyValue"}, "default": []},
+    {"name": "droppedAttributesCount", "type": "int", "default": 0}
+  ]
+}

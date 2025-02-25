@@ -1,0 +1,10 @@
+{
+  "namespace": "com.galiglobal.benchmark.avro",
+  "type": "record",
+  "name": "ResourceLogs",
+  "fields": [
+    {"name": "resource", "type": ["null", "Resource"], "default": null},
+    {"name": "scopeLogs", "type": {"type": "array", "items": "ScopeLogs"}, "default": []},
+    {"name": "schemaUrl", "type": ["null", "string"], "default": null}
+  ]
+}
