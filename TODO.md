@@ -2,6 +2,7 @@
 
 - [ ] Add flatbuffers
 - [ ] Visualization using Apache eCharts
+- [ ] Fix data sizes, make sure there's no random text
 - [ ] Final run
 - [ ] Proper README.md
 
