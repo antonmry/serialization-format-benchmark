@@ -11,8 +11,7 @@ public class BenchmarkRunner {
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-//            .include(ProtoBenchSimple.class.getSimpleName())
-//            .include(ThriftBenchSimple.class.getSimpleName())
+            .include(JsonLogsBench.class.getSimpleName())
             .include(ProtoLogsBench.class.getSimpleName())
             .include(ThriftLogsBench.class.getSimpleName())
             .include(AvroLogsBench.class.getSimpleName())
