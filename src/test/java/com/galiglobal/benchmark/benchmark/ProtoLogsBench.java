@@ -8,6 +8,8 @@ import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.List;
 
+import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.MEASUREMENT_ITERATIONS;
+import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.MEASUREMENT_TIME;
 import static com.galiglobal.benchmark.benchmark.ProtoBenchmarkLogsFactory.*;
 
 @State(Scope.Benchmark)
@@ -18,25 +20,25 @@ public class ProtoLogsBench {
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
-    public void serializeSmallThroughput(SmallScopeLogs input) {
+    public void serializeSmallThroughput(SmallScopeLogs input) throws InvalidProtocolBufferException {
         protoScopeLogsService.serialize(input.scopeLogs);
     }
 
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
-    public void serializeBigThroughput(BigScopeLogs input) {
+    public void serializeBigThroughput(BigScopeLogs input) throws InvalidProtocolBufferException {
         protoScopeLogsService.serialize(input.scopeLogs);
     }
 
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeSmallThroughput(SmallScopeLogs input, Blackhole blackhole) throws InvalidProtocolBufferException {
         byte[] serialized = protoScopeLogsService.serialize(input.scopeLogs);
@@ -46,7 +48,7 @@ public class ProtoLogsBench {
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeBigThroughput(BigScopeLogs input, Blackhole blackhole) throws InvalidProtocolBufferException {
         byte[] serialized = protoScopeLogsService.serialize(input.scopeLogs);
@@ -58,7 +60,7 @@ public class ProtoLogsBench {
     @Fork(0)
     @Measurement(iterations = 1)
     @BenchmarkMode(Mode.SingleShotTime)
-    public void sizeOfSerializedData(Parameters parameters) {
+    public void sizeOfSerializedData(Parameters parameters) throws InvalidProtocolBufferException {
         protoScopeLogsService.printSerializedSize(getFixedScopeLogs(getManyFixedLogRecords(parameters.scopeLogsSize)));
     }
 

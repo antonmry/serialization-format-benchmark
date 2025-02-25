@@ -11,13 +11,15 @@ public class BenchmarkRunner {
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-            //.include(ProtoBenchSimple.class.getSimpleName())
-            //.include(ThriftBenchSimple.class.getSimpleName())
+//            .include(ProtoBenchSimple.class.getSimpleName())
+//            .include(ThriftBenchSimple.class.getSimpleName())
             .include(ProtoLogsBench.class.getSimpleName())
             .include(ThriftLogsBench.class.getSimpleName())
-            .verbosity(VerboseMode.EXTRA)
+            .verbosity(VerboseMode.NORMAL)
             .addProfiler(GCProfiler.class)
-            .build();
+            .resultFormat(org.openjdk.jmh.results.format.ResultFormatType.JSON)
+            .result("benchmark-results.json")
+           .build();
 
         new Runner(opt).run();
     }

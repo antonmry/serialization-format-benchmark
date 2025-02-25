@@ -30,7 +30,7 @@ public class ProtoBenchSimple {
     @Fork(0)
     @Measurement(iterations = 1)
     @BenchmarkMode(Mode.SingleShotTime)
-    public void sizeOfSerializedData(Parameters parameters) {
+    public void sizeOfSerializedData(Parameters parameters) throws InvalidProtocolBufferException {
         protoScopeLogsService.printSerializedSize(getFixedScopeLogs(getManyFixedLogRecords(parameters.scopeLogsSize)));
     }
 

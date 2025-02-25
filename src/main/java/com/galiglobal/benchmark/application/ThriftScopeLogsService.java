@@ -6,7 +6,7 @@ import org.apache.thrift.TSerializer;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 
-public class ThriftScopeLogsService {
+public class ThriftScopeLogsService implements ScopeLogsService<ScopeLogs, TException> {
 
     public byte[] serialize(ScopeLogs scopeLogs) throws TException {
         TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());

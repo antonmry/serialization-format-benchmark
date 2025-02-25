@@ -8,6 +8,8 @@ import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.List;
 
+import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.MEASUREMENT_ITERATIONS;
+import static com.galiglobal.benchmark.benchmark.BenchmarkConfig.MEASUREMENT_TIME;
 import static com.galiglobal.benchmark.benchmark.ThriftBenchmarkLogsFactory.*;
 
 @State(Scope.Benchmark)
@@ -18,7 +20,7 @@ public class ThriftLogsBench {
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeSmallThroughput(SmallScopeLogs input) throws TException {
         thriftScopeLogsService.serialize(input.scopeLogs);
@@ -27,7 +29,7 @@ public class ThriftLogsBench {
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeBigThroughput(BigScopeLogs input) throws TException {
         thriftScopeLogsService.serialize(input.scopeLogs);
@@ -36,7 +38,7 @@ public class ThriftLogsBench {
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeSmallThroughput(SmallScopeLogs input, Blackhole blackhole) throws TException {
         byte[] serialized = thriftScopeLogsService.serialize(input.scopeLogs);
@@ -46,7 +48,7 @@ public class ThriftLogsBench {
     @Benchmark
     @Warmup(iterations = 3, time = 3)
     @Fork(3)
-    @Measurement(iterations = 100, time = 3)
+    @Measurement(iterations = MEASUREMENT_ITERATIONS, time = MEASUREMENT_TIME)
     @BenchmarkMode(Mode.Throughput)
     public void serializeAndDeserializeBigThroughput(BigScopeLogs input, Blackhole blackhole) throws TException {
         byte[] serialized = thriftScopeLogsService.serialize(input.scopeLogs);
