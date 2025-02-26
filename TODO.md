@@ -1,8 +1,7 @@
 
-
 - [ ] Add flatbuffers
-- [ ] Visualization using Apache eCharts
-- [ ] Fix data sizes, make sure there's no random text
+- [ ] Visualization using Apache eCharts: responsive
+- [ ] Fix data sizes: remove benchmark and do it differently
 - [ ] Final run
 - [ ] Proper README.md
 
