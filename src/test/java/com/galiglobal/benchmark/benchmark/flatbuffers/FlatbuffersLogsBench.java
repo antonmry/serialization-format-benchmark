@@ -53,15 +53,6 @@ public class FlatbuffersLogsBench {
         blackhole.consume(flatbuffersScopeLogsService.deserialize(serialized));
     }
 
-    @Benchmark
-    @Warmup(iterations = 0)
-    @Fork(0)
-    @Measurement(iterations = 1)
-    @BenchmarkMode(Mode.SingleShotTime)
-    public void sizeOfSerializedData(Parameters parameters) {
-        flatbuffersScopeLogsService.printSerializedSize(getScopeLogs(getManyLogRecords(parameters.scopeLogsSize)));
-    }
-
     @State(Scope.Benchmark)
     public static class SmallScopeLogs {
         public ScopeLogs scopeLogs;
@@ -80,11 +71,5 @@ public class FlatbuffersLogsBench {
         public void setUp() {
             scopeLogs = getScopeLogs(getManyLogRecords(1000));
         }
-    }
-
-    @State(Scope.Benchmark)
-    public static class Parameters {
-        @Param({"1", "10", "1000", "1000000"})
-        public int scopeLogsSize;
     }
 }

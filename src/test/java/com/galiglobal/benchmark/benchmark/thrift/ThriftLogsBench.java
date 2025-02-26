@@ -54,15 +54,6 @@ public class ThriftLogsBench {
         blackhole.consume(thriftScopeLogsService.deserialize(serialized));
     }
 
-    @Benchmark
-    @Warmup(iterations = 0)
-    @Fork(0)
-    @Measurement(iterations = 1)
-    @BenchmarkMode(Mode.SingleShotTime)
-    public void sizeOfSerializedData(Parameters parameters) throws TException {
-        thriftScopeLogsService.printSerializedSize(getFixedScopeLogs(getManyFixedLogRecords(parameters.scopeLogsSize)));
-    }
-
     @State(Scope.Benchmark)
     public static class SmallScopeLogs {
         public ScopeLogs scopeLogs;
@@ -81,11 +72,5 @@ public class ThriftLogsBench {
         public void setUp() {
             scopeLogs = getScopeLogs(getManyLogRecords(1000));
         }
-    }
-
-    @State(Scope.Benchmark)
-    public static class Parameters {
-        @Param({"1", "10", "1000", "1000000"})
-        public int scopeLogsSize;
     }
 }

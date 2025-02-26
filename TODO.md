@@ -1,9 +1,9 @@
 
-- [ ] Add flatbuffers
-- [ ] Visualization using Apache eCharts: responsive
-- [ ] Fix data sizes: remove benchmark and do it differently
-- [ ] Final run
+- [x] Add flatbuffers
+- [x] Visualization using Apache eCharts: responsive
+- [x] Fix data sizes: remove benchmark and do it differently
 - [ ] Proper README.md
+- [ ] Final run
 
 protoc --java_out=logs/ *.proto
 

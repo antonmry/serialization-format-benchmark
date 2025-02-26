@@ -40,7 +40,7 @@
         }
         .chart-container {
             width: 100%;
-            height: 400px;
+            height: 450px;
         }
         .description {
             padding: 30px;
@@ -94,7 +94,7 @@
                 gap: 15px;
             }
             .chart-container {
-                height: 350px;
+                height: 400px;
             }
             .loading {
                 font-size: 16px;
@@ -151,7 +151,7 @@
     <div class="content-container">
         <div class="box">
             <div class="description">
-                <p>This visualization compares the performance of different serialization formats (Avro, Protobuf, Json, and Thrift) 
+                <p>This visualization compares the performance of different serialization formats (Avro, Protobuf, Json, Thrift, and FlatBuffers) 
                 across four different benchmarks:</p>
                 <ul>
                     <li><strong>Small Data Serialization:</strong> Performance when serializing small data objects</li>
@@ -160,6 +160,8 @@
                     <li><strong>Big Data Serialization + Deserialization:</strong> Combined performance for large data objects</li>
                 </ul>
                 <p>The y-axis shows operations per second (ops/s), higher values indicate better performance.</p>
+                <p>For more detailed metrics and advanced analysis, check out the <a href="https://jmh.morethan.io/?source=https://antonmry.github.io/serialization-format-benchmark/benchmark-results.json" target="_blank">JMH Visualizer</a>.</p>
+                <p>The source code for all benchmarks is available in the <a href="https://github.com/antonmry/serialization-format-benchmark/" target="_blank">GitHub repository</a>.</p>
             </div>
         </div>
 
@@ -210,6 +212,7 @@
                     else if (lowerBenchmark.includes('proto')) format = 'Protobuf';
                     else if (lowerBenchmark.includes('json')) format = 'Json';
                     else if (lowerBenchmark.includes('thrift')) format = 'Thrift';
+                    else if (lowerBenchmark.includes('flatbuffers')) format = 'FlatBuffers';
                     else {
                         console.warn('Unknown format in benchmark:', benchmark);
                         return;
@@ -243,7 +246,7 @@
             const chart = echarts.init(document.getElementById(containerId));
 
             const formats = Object.keys(data);
-            const colors = ['#4299E1', '#48BB78', '#F6AD55', '#F56565'];
+            const colors = ['#4299E1', '#48BB78', '#F6AD55', '#F56565', '#9F7AEA'];
 
             // Adjust options based on screen size
             const isMobile = window.innerWidth <= 768;
@@ -312,18 +315,26 @@
                         fontSize: 13
                     },
                     formatter: function(params) {
+                        const formatNumber = (num) => {
+                            if (num >= 1000000) {
+                                return (num / 1000000).toFixed(1) + 'M';
+                            } else if (num >= 1000) {
+                                return (num / 1000).toFixed(1) + 'K';
+                            }
+                            return num.toLocaleString();
+                        };
                         return `<div style="font-weight:600;margin-bottom:4px">${params.name}</div>
                                 <div style="color:#666">
                                     <span style="display:inline-block;margin-right:8px;width:10px;height:10px;background:${params.color};border-radius:50%"></span>
-                                    ${params.value.toLocaleString()} ops/s
+                                    ${formatNumber(params.value)} ops/s
                                 </div>`;
                     },
                     extraCssText: 'box-shadow: 0 0 8px rgba(0,0,0,0.1); border-radius: 4px;'
                 },
                 grid: {
-                    left: '12%',
+                    left: '8%',
                     right: '8%',
-                    top: '80px',
+                    top: '120px',
                     bottom: '60px',
                     containLabel: true
                 },
@@ -366,7 +377,14 @@
                         padding: [0, 0, 20, 0]
                     },
                     axisLabel: {
-                        formatter: value => value.toLocaleString(),
+                        formatter: function(value) {
+                            if (value >= 1000000) {
+                                return (value / 1000000).toFixed(1) + 'M';
+                            } else if (value >= 1000) {
+                                return (value / 1000).toFixed(1) + 'K';
+                            }
+                            return value.toLocaleString();
+                        },
                         color: '#2c3e50',
                         fontSize: isMobile ? 11 : 12,
                         margin: 12,
@@ -405,8 +423,16 @@
                     label: {
                         show: true,
                         position: 'top',
-                        distance: 8,
-                        formatter: value => value.value.toLocaleString(),
+                        distance: 15,
+                        formatter: function(params) {
+                            const num = params.value;
+                            if (num >= 1000000) {
+                                return (num / 1000000).toFixed(1) + 'M';
+                            } else if (num >= 1000) {
+                                return (num / 1000).toFixed(1) + 'K';
+                            }
+                            return num.toLocaleString();
+                        },
                         fontSize: 12,
                         fontWeight: 600,
                         color: '#2c3e50',
