@@ -33,7 +33,7 @@ dependencies {
 
 jmh {
     humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt") // human-readable output file
-    resultsFile = project.file("${project.buildDir}/reports/jmh/results.txt") // results file
+    resultsFile = project.file("docs/benchmark-results.json") // results file
     resultFormat = 'JSON' // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
     verbosity = 'NORMAL' // Verbosity mode. Available modes are: [SILENT, NORMAL, EXTRA]
 }
