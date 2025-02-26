@@ -1,6 +1,7 @@
 package com.galiglobal.benchmark.benchmark;
 
 import com.galiglobal.benchmark.benchmark.avro.AvroLogsBench;
+import com.galiglobal.benchmark.benchmark.flatbuffers.FlatbuffersLogsBench;
 import com.galiglobal.benchmark.benchmark.json.JsonLogsBench;
 import com.galiglobal.benchmark.benchmark.proto.ProtoLogsBench;
 import com.galiglobal.benchmark.benchmark.thrift.ThriftLogsBench;
@@ -19,10 +20,11 @@ public class BenchmarkRunner {
             .include(ProtoLogsBench.class.getSimpleName())
             .include(ThriftLogsBench.class.getSimpleName())
             .include(AvroLogsBench.class.getSimpleName())
+            .include(FlatbuffersLogsBench.class.getSimpleName())
             .verbosity(VerboseMode.NORMAL)
             .addProfiler(GCProfiler.class)
             .resultFormat(org.openjdk.jmh.results.format.ResultFormatType.JSON)
-            .result("benchmark-results.json")
+            .result("docs/benchmark-results.json")
            .build();
 
         new Runner(opt).run();
