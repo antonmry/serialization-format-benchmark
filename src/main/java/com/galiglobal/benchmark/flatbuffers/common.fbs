@@ -1,0 +1,78 @@
+// Copyright 2019, OpenTelemetry Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+namespace opentelemetry.flatbuffers.common.v1;
+
+// Union to represent different value types
+union AnyValueUnion {
+    StringValue,
+    BoolValue,
+    IntValue,
+    DoubleValue,
+    ArrayValue,
+    KeyValueList,
+    BytesValue
+}
+
+// Wrapper tables for union values
+table StringValue {
+    value:string;
+}
+
+table BoolValue {
+    value:bool;
+}
+
+table IntValue {
+    value:long;
+}
+
+table DoubleValue {
+    value:double;
+}
+
+table BytesValue {
+    value:[ubyte];
+}
+
+// AnyValue represents any type of attribute value
+table AnyValue {
+    value:AnyValueUnion;
+}
+
+// ArrayValue is a list of AnyValue messages
+table ArrayValue {
+    values:[AnyValue];
+}
+
+// KeyValueList is a list of KeyValue messages
+table KeyValueList {
+    values:[KeyValue];
+}
+
+// KeyValue is a key-value pair
+table KeyValue {
+    key:string;
+    value:AnyValue;
+}
+
+// InstrumentationScope represents the instrumentation scope information
+table InstrumentationScope {
+    name:string;
+    version:string;
+    attributes:[KeyValue];
+    dropped_attributes_count:uint32;
+}
+
+root_type AnyValue;

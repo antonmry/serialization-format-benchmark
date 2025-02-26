@@ -25,3 +25,5 @@ avro-tools compile schema \
   "$AVRO_DIR/LogsData.avsc" \
   "$AVRO_DIR"
 
+brew install flatbuffers
+flatc -j *.fbs
