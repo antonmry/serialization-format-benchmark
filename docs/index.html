@@ -269,10 +269,16 @@
                 },
                 title: {
                     text: title,
+                    subtext: 'Operations per second',
                     textStyle: {
                         fontSize: isMobile ? 14 : 16,
                         fontWeight: 600,
                         color: '#2c3e50'
+                    },
+                    subtextStyle: {
+                        fontSize: isMobile ? 12 : 13,
+                        color: '#666',
+                        fontWeight: 500
                     },
                     top: 10,
                     left: '50%',
@@ -367,15 +373,6 @@
                 },
                 yAxis: {
                     type: 'value',
-                    name: 'Operations per second',
-                    nameLocation: 'middle',
-                    nameGap: isMobile ? 45 : 65,
-                    nameTextStyle: {
-                        color: '#2c3e50',
-                        fontSize: isMobile ? 12 : 13,
-                        fontWeight: 500,
-                        padding: [0, 0, 20, 0]
-                    },
                     axisLabel: {
                         formatter: function(value) {
                             if (value >= 1000000) {
