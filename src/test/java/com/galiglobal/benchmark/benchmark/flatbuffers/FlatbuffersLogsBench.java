@@ -59,7 +59,7 @@ public class FlatbuffersLogsBench {
 
         @Setup(Level.Invocation)
         public void setUp() {
-            scopeLogs = getScopeLogs(List.of("test message"));
+            scopeLogs = getScopeLogs(List.of(getRandomString()));
         }
     }
 

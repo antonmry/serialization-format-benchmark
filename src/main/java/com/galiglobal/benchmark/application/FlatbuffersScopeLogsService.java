@@ -5,19 +5,26 @@ import com.google.flatbuffers.FlatBufferBuilder;
 import java.nio.ByteBuffer;
 
 public class FlatbuffersScopeLogsService implements ScopeLogsService<ScopeLogs, RuntimeException> {
-    
+
     @Override
     public byte[] serialize(ScopeLogs scopeLogs) throws RuntimeException {
         ByteBuffer bb = scopeLogs.getByteBuffer();
-        byte[] bytes = new byte[bb.remaining()];
-        bb.get(bytes);
+        // Create a new buffer and copy the data to simulate real serialization cost
+        ByteBuffer copy = ByteBuffer.allocate(bb.remaining());
+        copy.put(bb);
+        copy.flip();
+        byte[] bytes = new byte[copy.remaining()];
+        copy.get(bytes);
         return bytes;
     }
 
     @Override
     public ScopeLogs deserialize(byte[] serializedScopeLogs) throws RuntimeException {
-        ByteBuffer bb = ByteBuffer.wrap(serializedScopeLogs);
-        return ScopeLogs.getRootAsScopeLogs(bb);
+        // Create a new buffer and copy the data to simulate real deserialization cost
+        ByteBuffer copy = ByteBuffer.allocate(serializedScopeLogs.length);
+        copy.put(serializedScopeLogs);
+        copy.flip();
+        return ScopeLogs.getRootAsScopeLogs(copy);
     }
 
     @Override
